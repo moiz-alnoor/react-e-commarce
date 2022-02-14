@@ -21,7 +21,7 @@ const App = () => {
       .then((res) => res.json())
       .then((data) => setData(data))
       setData(data)
-  }, [])
+  }, [data])
 
 
   const onAdd = (product) => {
