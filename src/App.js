@@ -1,28 +1,19 @@
-import React, { useEffect, useState } from 'react'
- import Loader from 'react-loader-spinner'
+import React, { useEffect, useState } from "react";
+import Loader from "react-loader-spinner";
 
-
-import Header from './components/Header';
-import Main from './components/Main';
-import Basket from './components/Basket';
+import Header from "./components/Header";
+import Main from "./components/Main";
+import Basket from "./components/Basket";
 
 const App = () => {
-
-
-  const [data, setData] =useState([]);
-
-  
-
-
-  
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products`)
       .then((res) => res.json())
-      .then((data) => setData(data))
-      setData(data)
-  }, [data])
-
+      .then((data) => setData(data));
+    setData(data);
+  }, [data]);
 
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
@@ -48,34 +39,31 @@ const App = () => {
       );
     }
   };
-    
+
   //const  {products} = [...data]
-    
-    const [cartItems, setCartItems] = useState([]);
-         
-             return (data? 
-   <div>
-       <Header countCartItems={cartItems.length}></Header>
-       <div class="container-fluid">
-      
-               <div class="row mt-5">
-               
-       <Main data={data} onAdd={onAdd}></Main>
-       <Basket
-          cartItems={cartItems}
-          onAdd={onAdd}
-          onRemove={onRemove}></Basket>
+
+  const [cartItems, setCartItems] = useState([]);
+
+  return data ? (
+    <div>
+      <Header countCartItems={cartItems.length}></Header>
+      <div class="container-fluid">
+        <div class="row mt-5">
+          <Main data={data} onAdd={onAdd}></Main>
+          <Basket
+            cartItems={cartItems}
+            onAdd={onAdd}
+            onRemove={onRemove}
+          ></Basket>
+        </div>
+      </div>
     </div>
+  ) : (
+    <div className="loader">
+      {" "}
+      <Loader type="Puff" color="#00BFFF" height={300} width={200} />
     </div>
-    </div>
-    : <div className="loader">   <Loader
-         type="Puff"
-         color="#00BFFF"
-         height={300}
-         width={200}
-         
-      /></div>
-   );   }
-  
+  );
+};
 
 export default App;
